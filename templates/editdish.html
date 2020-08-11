@@ -1,0 +1,95 @@
+{% extends 'base2.html' %}
+{% block  body %}
+{% load static %}
+
+<div class="col-md-6">
+    <div class="page-header">
+        <h2>Dish</h2>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Availablily</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in dish %}
+            <tr>
+                <td>{{i.title}}</td>
+                <td>{{i.price}}</td>
+                {% if i.avail %}
+                <td>Available</td>
+                {% else %}
+                <td>Not Available</td>
+                {% endif %}
+                <td>
+                <form action="" method="post">
+                {% csrf_token %}
+                {% if i.avail %}
+                    <button type="submit" name='unavail' value="{{ i.id }}" class="btn btn-default btn-xs">Unavailable</button>
+                {% else %}
+                    <button type="submit" name='avail' value="{{ i.id }}" class="btn btn-success btn-xs">Available</button>
+                {% endif %}
+                    
+                    <button type="submit" name="delete" value="{{ i.id }}" class="btn btn-danger btn-xs">Delete</button>
+                </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+<div class="col-md-6">
+    <div class="page-header">
+        <h2>Add Dish</h2>
+    </div>
+    <form method='post' enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="form-group">
+            <label for="exampleInputEmail1">Select Categoty</label>
+            <select class="form-control" name="cat" required>
+                <option selected disabled>Select Categoty</option>
+               {% for i in cat %}
+                 <option value="{{ i.id }}" >{{ i.name }}</option>
+               {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Title</label>
+            <input type="text" name='title' class="form-control" id="exampleInputPassword1" placeholder="Title">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Price</label>
+            <input type="number" name='price' class="form-control" id="exampleInputPassword1" placeholder="Price">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">MRP</label>
+            <input type="text" name='mrp' class="form-control" id="exampleInputPassword1" placeholder="Mrp">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">Image one</label>
+            <input type="file" name='img' id="exampleInputFile">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">Image Two</label>
+            <input type="file" name='img1' id="exampleInputFile">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">Image Three</label>
+            <input type="file" name='img2' id="exampleInputFile">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">Discription</label>
+            <textarea class="form-control" name="dis" rows="5" cols="35" placeholder="Enter Discription here.."></textarea>
+        </div>
+        <button type="submit" name="addish" class="btn btn-default">Submit</button>
+    </form>
+</div>
+
+
+{% endblock %}

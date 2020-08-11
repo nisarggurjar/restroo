@@ -1,0 +1,70 @@
+{% extends 'base2.html' %}
+{% block  body %}
+{% load static %}
+
+<div class="col-md-6">
+    <div class="page-header">
+        <h2>Team</h2>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Dish</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in team %}
+            <tr>
+                <td>{{i.name}}</td>
+                <td>{{i.designation }}</td>
+                <td>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <button type="submit" name="delete" value="{{ i.id }}"
+                            class="btn btn-danger btn-xs">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="col-md-6">
+    <div class="page-header">
+        <h2>Add Dish</h2>
+    </div>
+    <form method='post' enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="form-group">
+            <label for="exampleInputPassword1">Name</label>
+            <input type="text" name='name' class="form-control" id="exampleInputPassword1" placeholder="Name">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Designation</label>
+            <input type="text" name='desig' class="form-control" id="exampleInputPassword1" placeholder="Designation">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Facebook</label>
+            <input type="url" name='fb' class="form-control" id="exampleInputPassword1" placeholder="Facebook link">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Instagram</label>
+            <input type="url" name='insta' class="form-control" id="exampleInputPassword1" placeholder="Instagram link">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Twitter</label>
+            <input type="url" name='tw' class="form-control" id="exampleInputPassword1" placeholder="Twitter link">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">Profile Picture</label>
+            <input type="file" name='img' id="exampleInputFile">
+        </div>
+        <button type="submit" name="addteam" class="btn btn-default">Submit</button>
+    </form>
+</div>
+
+
+{% endblock %}

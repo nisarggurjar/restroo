@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+{% if error %}
+<script>
+    alert('Incorrect Pin or Dilivery is not available on this pin please try anoter one');
+</script>
+{% endif %}
+{% if errorMob %}
+<script>
+    alert('Incorrect Mobile');
+</script>
+{% endif %}
+<script>
+    alert('Please Enter your address before adding item into your cart');
+</script>
+<section class="page_header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2 class="text-uppercase">Address</h2>
+                <p>Delivery on Time Guranteed !!!!! </p>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container col-md-3"></div>
+<div class="container col-md-6">
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label class="form-label" for="">House Number</label>
+            <input type="text" class="form-control" required name="hn" id="" placeholder="House Number">
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="">Area</label>
+            <input type="text" class="form-control" required name="area" id="" placeholder="Area/Colony">
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="">Landmark</label>
+            <input type="text" class="form-control" required name="lm" id="" placeholder="House Number">
+        </div>
+        <div class="form-group">
+            <label class="form-label" onfocusout="autofilladd()" for="">Pin Code</label>
+            <input type="number" min="110000" max="999999" required class="form-control" name="pin" id="" placeholder="Pin Code">
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="">City</label>
+            <input type="text" class="form-control" required name="city" id="" placeholder="City">
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="">Mobile Number</label>
+            <input type="text" class="form-control" required name="mob" id="" placeholder="Contact Number">
+        </div>
+        <button type="submit" name="address" class="btn btn-default">Submit</button>
+    </form>
+    
+</div>
+{% endblock body %}

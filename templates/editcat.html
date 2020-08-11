@@ -1,0 +1,48 @@
+{% extends 'base2.html' %}
+{% block  body %}
+{% load static %}
+
+<div class="col-md-6">
+    <div class="page-header">
+        <h2>Catrgories</h2>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Dish</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in cat %}
+            <tr>
+                <td>{{i.name}}</td>
+                <td>{{i.dish_set.count }}</td>
+                <td>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <button type="submit" name="delete" value="{{ i.id }}"
+                            class="btn btn-danger btn-xs">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="col-md-6">
+    <div class="page-header">
+        <h2>Add Category</h2>
+    </div>
+    <form method='post'>
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="exampleInputEmail1">Enter Category Name</label>
+            <input type="text" name='name' class="form-control" id="exampleInputEmail1" placeholder="Enter Category">
+        </div>
+        <button type="submit" name='addCat' class="btn btn-default">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

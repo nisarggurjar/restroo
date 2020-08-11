@@ -1,0 +1,81 @@
+{% extends 'base2.html' %}
+{% block  body %}
+{% load static %}
+<div class="col-md-6">
+    <div class="page-header">
+        <h2>Reservations</h2>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Guests</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Confirm</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in res %}
+            <tr>
+                <td>{{i.name}}</td>
+                <td>{{i.guests}}</td>
+                <td>{{i.date}}</td>
+                <td>{{i.time}}</td>
+                <td>{{i.confirm}}</td>
+                <td>
+                <form action="" method="post">
+                {% csrf_token %}
+                    <button type="submit" name='confirm' value="{{ i.id }}" class="btn btn-success btn-xs">Confirm</button>
+                    <button type="submit" name="delete" value="{{ i.id }}" class="btn btn-danger btn-xs">Delete</button>
+                </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="col-md-6">
+    <div class="page-header">
+        <h2>Orders</h2>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>dish</th>
+                <th>price</th>
+                <th>qty</th>
+                <th>status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in orders %}
+            <tr>
+                <td>{{i.user.username}}</td>
+                <td>{{i.dish.title}}</td>
+                <td>{{i.dish.price}}</td>
+                <td>{{i.qty}}</td>
+                {% if i.confirm %}
+                 <td>Paid</td>
+                {% else %}
+                 <td>Due</td>
+                {% endif %}
+                <td>
+                <form action="" method="post">
+                {% csrf_token %}
+                    <button type="submit" name='confirmOrder' value="{{ i.id }}" class="btn btn-success btn-xs">Confirm</button>
+                    <button type="submit" name="deleteOrder" value="{{ i.id }}" class="btn btn-danger btn-xs">Delete</button>
+                </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock body %}

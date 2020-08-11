@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load static %}
+            <section class="page_header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h2 class="text-uppercase">{{dish.title}}</h2>
+                            <p>{{ dish.dis}}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="shop-content">
+                <div class="container">
+                
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="single-shop-carousel">
+                                <div>
+                                    <img class="img-responsive" src="{{ dish.img.url }}" alt="1" style=" height:450px; width:550px; ">
+                                </div>
+                                <div>
+                                    <img class="img-responsive" src="{{ dish.img1.url }}" alt="1" style=" height:450px; width:550px; ">
+                                </div>
+                                <div>
+                                    <img class="img-responsive" src="{{ dish.img2.url }}" alt="1" style=" height:450px; width:550px; ">
+                                </div>
+                                <div>
+                                    <img class="img-responsive" src="{{ dish.img.url }}" alt="1" style=" height:450px; width:550px; ">
+                                </div>
+                                <div>
+                                    <img class="img-responsive" src="{{ dish.img1.url }}" alt="1" style=" height:450px; width:550px; ">
+                                </div>
+                                <div>
+                                    <img class="img-responsive" src="{{ dish.img2.url }}" alt="1" style=" height:450px; width:550px; ">
+                                </div>
+                            </div>
+                            <div class="single-shop-carousel-nav">
+                                <div>
+                                    <img class="img-responsive" src="{{ dish.img.url }}" alt="2" style=" height:150px; width:150px; ">
+                                </div>
+                                <div>
+                                    <img class="img-responsive" src="{{ dish.img1.url }}" alt="2" style=" height:150px; width:150px; ">
+                                </div>
+                                <div>
+                                    <img class="img-responsive" src="{{ dish.img2.url }}" alt="2" style=" height:150px; width:150px; ">
+                                </div>
+                                <div>
+                                    <img class="img-responsive" src="{{ dish.img.url }}" alt="2" style=" height:150px; width:150px; ">
+                                </div>
+                                <div>
+                                    <img class="img-responsive" src="{{ dish.img1.url }}" alt="2" style=" height:150px; width:150px; ">
+                                </div>
+                                <div>
+                                    <img class="img-responsive" src="{{ dish.img2.url }}" alt="2" style=" height:150px; width:150px; ">
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-md-6 shop-single-info">
+                            <div class="shop-single-title">
+                                <h3 class="text-left">{{ dish.title }}</h3>
+                            </div>
+                            <div class="shop-single-price">
+                                <div class="ssp pull-left">&#8377;{{dish.price}} <span>&#8377;{{ dish.mrp }}</span></div>
+                            </div>
+                            <p>{{ dish.dis }}</p>
+                            <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="quantity">
+                                <input type="number" name='qty' min='1' max='5' required default='1' placeholder="1">
+                                <label>Quantity</label>
+                                <button type='submit' class="btn btn-default pull-right">Add to Cart</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="tab-style3">
+
+                        
+
+                        
+                    </div>
+                    <div class="clearfix"></div>
+                    </div>
+                </div>
+            </section>
+
+           {% endblock %}
