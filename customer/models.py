@@ -37,3 +37,14 @@ class Address(models.Model):
     
     def __str__(self):
         return self.user.username
+
+class user_details(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE, blank=True, null=True)
+    mob = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.user)
+
+class Payment_ids(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    ids = models.CharField(max_length=100,null=True)

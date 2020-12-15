@@ -7,21 +7,20 @@ from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 
-
 def HeaderCart(usr):
     cartDish = Add_to_cart.objects.filter(user = usr)
     total = 0
     for i in cartDish:
         total += (i.dish.price) * (i.qty)
-    return cartDish, total
+    return cartDish, total, len(cartDish)
 
 def About(request):
     team = Team.objects.all()
     if request.user.is_anonymous:
         d = {'team':team}
     else:
-        cartDish, total = HeaderCart(request.user)
-        d = {'team':team, 'cartDish':cartDish, 'total':total}
+        cartDish, total, orderCount = HeaderCart(request.user)
+        d = {'team':team, 'cartDish':cartDish, 'total':total, 'orderCount':orderCount }
     return render(request, 'about.html',d)
 
 def Menu(request):
@@ -30,19 +29,20 @@ def Menu(request):
     if request.user.is_anonymous:
         d = {'cat':cat, 'dish':dish}
     else:
-        cartDish, total = HeaderCart(request.user)
-        d = {'cat':cat, 'dish':dish, 'cartDish':cartDish, 'total':total}
+        cartDish, total, orderCount = HeaderCart(request.user)
+        d = {'cat':cat, 'dish':dish, 'cartDish':cartDish,'orderCount':orderCount, 'total':total}
     return render(request, 'menu.html', d)
 
 def Contact(request):
     d = {}
     if request.user.is_authenticated:
-        cartDish, total = HeaderCart(request.user)
-        d = {'cartDish':cartDish, 'total':total}
+        cartDish, total, orderCount = HeaderCart(request.user)
+        d = {'cartDish':cartDish, 'total':total, 'orderCount':orderCount}
     return render(request, 'contact.html',d)
 
 def SinglePage(request, dishid):
     dish = Dish.objects.filter(id = dishid).first()
+    d = {}
     if request.POST:
         if not request.user.is_authenticated:
             return redirect('account')
@@ -55,7 +55,11 @@ def SinglePage(request, dishid):
                 Add_to_cart.objects.create(user = request.user, dish = dish, qty = request.POST['qty'])
         else:
             return redirect('address')  
-    d = {'dish':dish}
+    if request.user.is_authenticated:
+        cartDish, total,orderCount = HeaderCart(request.user)
+        d = {'dish':dish, 'cartDish':cartDish,'orderCount':orderCount, 'total':total}
+    else:
+        d = {'dish':dish}
     return render(request, 'shop_single_full.html', d)
 
 def Orders(request,oid):

@@ -8,4 +8,7 @@ urlpatterns = [
     path('cart/', Cart, name='cart'),
     path('deleteOrder/<int:Oid>',deleteOrder, name='dOrder'),
     path('deletecartitem/<int:cid>/', deleteCartItem, name='deletecartitem'),
+    path('payment/',Payment,name = "payment"),
+    path('payment_check/',Payment_check, name = 'payment_check'),
+    path('payment_declined/',PaymentDeclined, name = 'payment_declined'),
 ]

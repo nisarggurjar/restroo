@@ -61,9 +61,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="cart-btn">
-                                        <button class="btn btn-default" type="submit">Update Cart</button>
-                                        <button class="btn btn-success" type="submit"
-                                            onclick="window.open('shop_checkout.html', '_self')">Checkout</button>
+                                        <a href="{% url 'menu' %}"><button class="btn btn-default" type="submit">Update Cart</button></a>
+                                        <a href="{% url 'payment' %}"><button class="btn btn-success" type="submit">Checkout</button></a>
                                     </div>
                                 </div>
                             </div>

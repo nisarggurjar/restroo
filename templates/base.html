@@ -89,8 +89,10 @@
                             <li class="dropdown">
                                 <a class="css-pointer dropdown-toggle" data-toggle="dropdown" role="button"
                                     aria-haspopup="true" aria-expanded="false"><i
-                                        class="fa fa-shopping-cart fsc pull-left"></i><span
-                                        class="cart-number">{{ request.user.add_to_cart_set.count }}</span><span class="caret"></span></a>
+                                        class="fa fa-shopping-cart fsc pull-left"></i>
+                                        <span class="cart-number">{{ request.user.add_to_cart_set.count }}</span><span class="caret"></span>
+                                        <span class="cart-number">{{ orderCount }}</span><span class="caret"></span>
+                                </a>
                                 <div class="cart-content dropdown-menu">
                                     <div class="cart-title">
                                         <h4>Shopping Cart</h4>

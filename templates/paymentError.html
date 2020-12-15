@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block body %}
+{% load static %}         
+            <section class="page_header vertical-padding">
+            </section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="giant-space">
+                            <h2 class="text-giant">Payment Declined</h2>
+                            <p class="wow fadeInUp">Sorry. The payment had declined please pay for orders to confirm your orders</p>
+                            <p class="top-space-lg"><a href="{% url 'home'  %}" class="btn btn-default btn-lg">Back to
+                                    home</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{% endblock body %}
