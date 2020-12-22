@@ -148,8 +148,8 @@ def deleteCartItem(request, cid):
     data = Add_to_cart.objects.filter(user = request.user, id = cid).delete()
     return redirect('menu')
 
-headers = {"X-Api-Key": "3bec9da8d186f2caca726f756252f5c6",
-           "X-Auth-Token": "c37cf15ee05894ccc423d642d5928923"}
+headers = {"X-Api-Key": "Yout Instamojo api key",
+           "X-Auth-Token": "Your Auth Token"}
 
 def PaymentDeclined(request):
     if request.user.is_anonymous:
